@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+快速排序：
+    1.首先，从数组中选择中间一项作为主元
+    2.创建两个指针，左边一个指向数组第一项，右边一个指向数组最后一项。移动左边指针知道我们找到一个比主元大的元素，接着，移动右边指针直到找到一个比主元小的元素，然后交换它们，重复这个过程，直到左边指针超过了右边指针。
+    3.重复之前的两个步骤，直至数组已完全排序
+-->
+
+<script>
+
+
+    class ArrayList{
+
+        constructor(arr){
+            //判断传进来是不是一个数组
+            if(Array.prototype.isPrototypeOf(arr)){
+                this.array = arr
+            }else{
+                alert('请传入一个数组')
+                return;
+            }
+        }
+
+        //声明swapQuickStort方法，用于快排换位
+        swapQuickStort(array,index1,index2){
+            var aux = array[index1]
+            array[index1] = array[index2]
+            array[index2] = aux
+        }
+
+        //声明partition方法，用于划分数组
+        partition(array,left,right){
+            //获取中心值
+            var pivot = array[Math.floor((left+right)/2)]
+
+            while(left <= right){
+                //在左边找到比中心值大的值
+                while(array[left] < pivot){
+                    left++
+                }
+                //在右边找到比中心值小的值
+                while(array[right] > pivot){
+                    right--
+                }
+                if(left <= right){
+                    //如果left还是比right小，将两个数值换位
+                    this.swapQuickStort(array,left,right)
+                    left++
+                    right--
+                }
+            }
+
+            return left;
+
+        }
+
+        //声明quick方法，用于递归数组
+        quick(array,left,right){
+            var index;
+            if(array.length > 1){
+
+                index = this.partition(array,left,right)
+                if(left < index-1){
+                    this.quick(array,left,index-1)
+                }
+                if(right > index){
+                    this.quick(array, index, right)
+                }
+            }
+
+        }
+
+        /*
+        * 归并排序：
+        *   归并排序是一种分治算法。其思想是将原始数组切分成较小的数组，直到每个小数组只有一个位置，接着将小数组归并成较大的数组，直到最后一个排序完毕的大数组。Mozilla,Firefox使用归并实现sort方法。
+        * */
+
+        quickSort() {
+            this.quick(this.array,0,this.array.length-1)
+        }
+
+    }
+
+    var arr = [3,1,4]
+
+    let array = new ArrayList(arr);
+
+    array.quickSort()
+
+    console.log(arr)
+</script>
+</body>
+</html>
