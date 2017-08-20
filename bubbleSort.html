@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+冒泡算法：
+    比较任何两个相邻的项，如果第一个比第二个大，则交换他们。元素向上移至正确的顺序，就好像气泡升到表面一样，冒泡排序因此得名。
+-->
+
+<script>
+
+
+    class ArrayList{
+
+        constructor(arr){
+            //判断传进来是不是一个数组
+            if(Array.prototype.isPrototypeOf(arr)){
+
+                this.array = arr
+
+            }else{
+
+                alert('请传入一个数组')
+                return;
+
+            }
+
+        }
+
+        //声明swap方法
+        swap(index1, index2){
+            var aux = this.array[index1];
+            this.array[index1] = this.array[index2];
+            this.array[index2] = aux;
+        }
+
+        //构建数据结构
+        insert(item){
+            this.array.push(item)
+        };
+
+        //转成字符串，方便调试
+        toString(){
+
+            return this.array.join();
+
+        };
+
+        /*
+        * 冒泡算法：
+        *   概念:比较任意两个相邻的项，如果第一个比第二个大，则交换它们。元素向上移动至正确的顺序，就好像气泡升至表面一样
+        * */
+
+        bubbleSort() {
+            var len = this.array.length;
+            //外层for决定循环的次数
+            for (var i = 0; i < len; i++) {
+                //内层for决定每轮比较的次数
+                for (var j = 0; j < len-1-i; j++) {
+                    if (this.array[j] > this.array[j + 1]) {
+                        this.swap(j, j + 1)
+                    };
+                };
+            };
+        };
+
+    }
+
+    var arr = [3,1,4,7,2,9,8,13,17,15]
+
+    let array = new ArrayList(arr);
+
+    array.bubbleSort()
+
+    arr =  array.array
+    console.log(arr)
+</script>
+</body>
+</html>
