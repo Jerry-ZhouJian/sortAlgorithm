@@ -6,8 +6,8 @@
 </head>
 <body>
 <!--
-选择排序：
-    找到数据结构中的最小值并将其放在第一位，接着找到第二小的值将其放在第二位，以此类推。
+插入排序：
+    从第二项开始，应该待在原位还是插到第一项之前，接着从第三项开始，应该待在原位还是，插到第二项之前，还是插到第三项之前，以此类推
 -->
 
 <script>
@@ -54,25 +54,23 @@
         *   找到数据结构中的最小值并将其放在第一位，接着找到第二小的值将其放在第二位，以此类推。
         * */
 
-        selectionSort() {
+        insertionSort() {
             //记录数组长度
-            var len = this.array.length;
-            //记录最小值的小标
-            var indexMin = 0;
+            let len = this.array.length;
+            //当前位置的下标
+            let j = 0;
+            //当前循环要移动的值
+            let temp = 0;
             //外层for决定循环的次数
             for (var i = 0; i < len - 1; i++) {
-                indexMin = i;
-                //内层for决定每轮比较的次数
-                for (var j = i; j < len; j++) {
-                    if (this.array[indexMin] > this.array[j]) {
-                        indexMin = j;
-                    };
-                };
-                //内层比较结束时，如果i和indexMin不一样，则换位
-                if(i !== indexMin){
-                    this.swap(i,indexMin)
+                j = i;
+                temp = this.array[i]
 
-                }
+                    while(j>0 && this.array[j-1] > temp){
+                        this.array[j] = this.array[j-1]
+                        j--;
+                    }
+                    this.array[j] = temp;
 
             };
         };
@@ -83,7 +81,7 @@
 
     let array = new ArrayList(arr);
 
-    array.selectionSort()
+    array.insertionSort()
 
     arr =  array.array
     console.log(arr)
