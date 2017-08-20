@@ -6,8 +6,8 @@
 </head>
 <body>
 <!--
-冒泡算法：
-    比较任何两个相邻的项，如果第一个比第二个大，则交换他们。元素向上移至正确的顺序，就好像气泡升到表面一样，冒泡排序因此得名。
+选择排序：
+    找到数据结构中的最小值并将其放在第一位，接着找到第二小的值将其放在第二位，以此类推。
 -->
 
 <script>
@@ -50,20 +50,30 @@
         };
 
         /*
-        * 冒泡算法：
-        *   概念:比较任意两个相邻的项，如果第一个比第二个大，则交换它们。元素向上移动至正确的顺序，就好像气泡升至表面一样
+        * 选择排序：
+        *   找到数据结构中的最小值并将其放在第一位，接着找到第二小的值将其放在第二位，以此类推。
         * */
 
-        bubbleSort() {
+        selectionSort() {
+            //记录数组长度
             var len = this.array.length;
+            //记录最小值的小标
+            var indexMin = 0;
             //外层for决定循环的次数
-            for (var i = 0; i < len; i++) {
+            for (var i = 0; i < len - 1; i++) {
+                indexMin = i;
                 //内层for决定每轮比较的次数
-                for (var j = 0; j < len-1-i; j++) {
-                    if (this.array[j] > this.array[j + 1]) {
-                        this.swap(j, j + 1)
+                for (var j = i; j < len; j++) {
+                    if (this.array[indexMin] > this.array[j]) {
+                        indexMin = j;
                     };
                 };
+                //内层比较结束时，如果i和indexMin不一样，则换位
+                if(i !== indexMin){
+                    this.swap(i,indexMin)
+
+                }
+
             };
         };
 
@@ -73,7 +83,7 @@
 
     let array = new ArrayList(arr);
 
-    array.bubbleSort()
+    array.selectionSort()
 
     arr =  array.array
     console.log(arr)
